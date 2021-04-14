@@ -1,0 +1,36 @@
+x=[1 1 -1 -1; 1 -1 1 -1];
+t=[1 -1 -1 -1];
+w=[0 0];
+b=0;
+alpha=input('Enter learning rate:');
+theta=input('enter threshold value:');
+con = 1;
+epoch = 0;
+while con
+  con = 0;
+   for i=1:4
+     yin=b+(x(1,i)*w(1)+x(2,i)*w(2));
+     if yin>theta
+       y=1;
+     endif
+   endfor
+   if yin <=theta & yin >= -theta
+     y = 0;
+   endif
+   if yin < -theta
+     y = -1;
+   endif
+   if y - t(i)
+     con =1;
+     for j = 1:2
+       w(j)=w(j)+alpha*t(i)*x(j,i);
+     endfor
+     b=b+alpha*t(i);
+   endif
+   epoch=epoch+1;
+endwhile
+
+disp('final Wgt matrix :');
+disp(w);
+disp('final Bias :');
+disp(b)
